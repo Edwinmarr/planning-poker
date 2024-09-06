@@ -1,5 +1,5 @@
-import "./App.css";
-import FormCreateRoom from "./components/molecules/FormCreateRoom";
+import "./App.scss";
+import { FormCreateRoom } from "./components/molecules";
 
 function App() {
   return <FormCreateRoom />;

@@ -1,10 +1,10 @@
 import { FC } from "react";
-import InputField from "../../atoms/InputField";
-import Button from "../../atoms/Button";
+import InputField from "../../atoms/InputField/InputField";
+import Button from "../../atoms/Button/Button";
 
 interface Props {}
 
-const FormCreateRoom: FC<Props> = (props) => {
+export const FormCreateRoom: FC<Props> = (props) => {
   const onClickButton = () => {};
   const onChangeInput = () => {};
 
@@ -15,5 +15,3 @@ const FormCreateRoom: FC<Props> = (props) => {
     </>
   );
 };
-
-export default FormCreateRoom;
