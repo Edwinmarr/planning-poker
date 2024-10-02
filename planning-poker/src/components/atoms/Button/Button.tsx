@@ -6,6 +6,7 @@ interface Props {
   type?: "button" | "submit" | "reset";
   label: string;
   disabled?: boolean;
+  testId?: string;
 }
 
 const Button: FC<Props> = ({
@@ -13,6 +14,7 @@ const Button: FC<Props> = ({
   type = "button",
   onClick,
   disabled = false,
+  testId,
 }) => {
   return (
     <button
@@ -20,6 +22,7 @@ const Button: FC<Props> = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
+      data-testid={testId}
     >
       {label}
     </button>

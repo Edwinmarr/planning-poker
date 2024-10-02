@@ -40,11 +40,7 @@ export const FormCreateRoom = () => {
   };
 
   const handleCreateRoom = () => {
-    if (isValid) {
-      alert(`Sala creada con nombre ${inputValue}`);
-    } else {
-      alert(errorMessage);
-    }
+    alert(`Sala creada con nombre ${inputValue}`);
   };
 
   const handleOnChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,12 +56,14 @@ export const FormCreateRoom = () => {
         label="Nombra la partida"
         onChange={handleOnChangeInput}
         value={inputValue}
+        testId="inputFieldTestId"
       />
       <Label text={errorMessage}></Label>
       <Button
         onClick={handleCreateRoom}
         label="Crear partida"
         disabled={!isValid}
+        testId="ButtonTestId"
       />
     </div>
   );

@@ -5,9 +5,16 @@ interface Props {
   placeholder?: string;
   value: string;
   label?: string;
+  testId?: string;
 }
 
-const InputField: FC<Props> = ({ label, placeholder, value, onChange }) => {
+const InputField: FC<Props> = ({
+  label,
+  placeholder,
+  value,
+  onChange,
+  testId,
+}) => {
   return (
     <div className={styles["input-field"]}>
       {label && <label className={styles["input-field__label"]}>{label}</label>}
@@ -17,6 +24,7 @@ const InputField: FC<Props> = ({ label, placeholder, value, onChange }) => {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        data-testid={testId}
       />
     </div>
   );
