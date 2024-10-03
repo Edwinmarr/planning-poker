@@ -9,7 +9,8 @@ function App() {
       <Header logoLabel="Crear partida" />
       <Routes>
         <Route path="/" element={<CreateRoom />} />
-        <Route path="/about" element={<h1>About</h1>} />
+        <Route path="/partida/:nombre" element={<></>} />
+        <Route path="*" element={<h1>NOT FOUND</h1>} />
       </Routes>
     </Router>
   );

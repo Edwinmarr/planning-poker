@@ -3,11 +3,13 @@ import InputField from "../../atoms/InputField/InputField";
 import Button from "../../atoms/Button/Button";
 import styles from "./FormCreateRoom.module.scss";
 import Label from "../../atoms/Label/Label";
+import { useNavigate } from "react-router-dom";
 
 export const FormCreateRoom = () => {
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isValid, setIsValid] = useState(false);
+  const navigate = useNavigate();
 
   const validateInput = (value: string) => {
     const specialCharsRegex = /[_.*#/-]/;
@@ -40,7 +42,7 @@ export const FormCreateRoom = () => {
   };
 
   const handleCreateRoom = () => {
-    alert(`Sala creada con nombre ${inputValue}`);
+    navigate(`/partida/${inputValue}`);
   };
 
   const handleOnChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
