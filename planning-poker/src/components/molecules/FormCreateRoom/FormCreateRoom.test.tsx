@@ -47,7 +47,7 @@ describe("<FormCreateRoom>", () => {
     ],
   ])(
     "should show an error message when the input %s",
-    (testDescription, targetValue, expectedErrorMessage) => {
+    (_testDescription, targetValue, expectedErrorMessage) => {
       //Given
       render(<FormCreateRoom />);
       //When
