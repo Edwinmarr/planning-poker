@@ -1,0 +1,25 @@
+@import '../../../App.scss';
+
+.form-create-user-container{
+    background-color: #1F0D3F;
+    border-style:solid;
+    border-width: 1px;
+    border-color: $primary-border-color;
+    width: 40rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 1rem;
+    align-items: center;
+    &__radio-buttons{
+        display: flex;
+        flex-direction: row;
+    }
+    #form-create-user-container__input-field{
+        width: 75%;
+    }
+    #form-create-user-container__Button{
+        width: 25%;
+    }
+}
