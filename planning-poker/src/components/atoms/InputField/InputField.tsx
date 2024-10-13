@@ -6,6 +6,7 @@ interface Props {
   value: string;
   label?: string;
   testId?: string;
+  id?: string;
 }
 
 const InputField: FC<Props> = ({
@@ -14,9 +15,10 @@ const InputField: FC<Props> = ({
   value,
   onChange,
   testId,
+  id,
 }) => {
   return (
-    <div className={styles["input-field"]}>
+    <div id={id} className={styles["input-field"]}>
       {label && <label className={styles["input-field__label"]}>{label}</label>}
       <input
         className={styles["input-field__input"]}
