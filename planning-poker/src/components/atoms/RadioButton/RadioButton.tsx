@@ -12,6 +12,11 @@ interface Props {
 const RadioButton: FC<Props> = ({ value, name, testId, id }) => {
   return (
     <div className="radio-button-container">
+      <Label
+        className="normal_label"
+        id={styles["radio-button-container__label"]}
+        text={value}
+      ></Label>
       <input
         id={id}
         className={styles["radio-button"]}
@@ -20,7 +25,7 @@ const RadioButton: FC<Props> = ({ value, name, testId, id }) => {
         name={name}
         data-testid={testId}
       ></input>
-      <Label text={name}></Label>
+      <i></i>
     </div>
   );
 };

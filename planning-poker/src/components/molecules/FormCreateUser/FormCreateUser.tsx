@@ -27,8 +27,8 @@ const FormCreateUser: FC<Props> = ({}) => {
         label="Tu nombre"
       ></InputField>
       <div className={styles["form-create-user-container__radio-buttons"]}>
-        <RadioButton name="Jugador" value="Jugador"></RadioButton>
-        <RadioButton name="Espectador" value="Espectador"></RadioButton>
+        <RadioButton name="user" value="Jugador"></RadioButton>
+        <RadioButton name="user" value="Espectador"></RadioButton>
       </div>
       <Button
         id={styles["form-create-user-container__Button"]}

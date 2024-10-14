@@ -15,7 +15,7 @@ const Logo: FC<Props> = ({ label }) => {
         src={logo}
         alt="Pragma S.A."
       />
-      {label && <Label text={label}></Label>}
+      {label && <Label className="bold_label" text={label}></Label>}
     </div>
   );
 };

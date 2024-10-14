@@ -1,0 +1,33 @@
+.table-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    width: 90vw;             /* Ajusta según tu diseño, o establece un ancho fijo */
+    height: 80vh;           /* Hace que el contenedor ocupe toda la altura de la pantalla */
+  }
+  
+  .big-table,
+  .medium-table,
+  .small-table {
+    position: absolute;
+    top: 50;
+    left: 50;
+  }
+  
+  /* Opcional: Ajustar tamaños */
+  .big-table {
+    z-index: 3; /* Imagen de arriba */
+  }
+  
+  .medium-table {
+    top: 90px;
+    z-index: 2; /* Imagen intermedia */
+  }
+  
+  .small-table {
+    z-index: 1; /* Imagen de fondo */
+    top: 110px;
+  }
+  
