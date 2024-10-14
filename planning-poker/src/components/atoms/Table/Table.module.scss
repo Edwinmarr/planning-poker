@@ -12,7 +12,7 @@
   .medium-table,
   .small-table {
     position: absolute;
-    top: 50;
+    top: 0;
     left: 50;
   }
   
@@ -22,12 +22,12 @@
   }
   
   .medium-table {
-    top: 90px;
+    top: 25px;
     z-index: 2; /* Imagen intermedia */
   }
   
   .small-table {
     z-index: 1; /* Imagen de fondo */
-    top: 110px;
+    top: 47px;
   }
   

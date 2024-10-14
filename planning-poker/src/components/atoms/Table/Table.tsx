@@ -8,10 +8,16 @@ interface Props {}
 
 const Table: FC<Props> = ({}) => {
   return (
-    <div className={style["table-container"]}>
-      <img className={style["big-table"]} src={table1} alt="Big Table" />
-      <img className={style["medium-table"]} src={table2} alt="Medium Table" />
-      <img className={style["small-table"]} src={table3} alt="Small Table" />
+    <div>
+      <div className={style["table-container"]}>
+        <img className={style["big-table"]} src={table1} alt="Big Table" />
+        <img
+          className={style["medium-table"]}
+          src={table2}
+          alt="Medium Table"
+        />
+        <img className={style["small-table"]} src={table3} alt="Small Table" />
+      </div>
     </div>
   );
 };

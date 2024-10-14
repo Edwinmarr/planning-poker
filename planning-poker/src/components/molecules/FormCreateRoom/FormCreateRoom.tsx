@@ -60,7 +60,7 @@ export const FormCreateRoom = () => {
         value={inputValue}
         testId="inputFieldTestId"
       />
-      <Label className="bold-label" text={errorMessage}></Label>
+      <Label className="danger_label" text={errorMessage}></Label>
       <Button
         onClick={handleCreateRoom}
         label="Crear partida"
