@@ -18,8 +18,8 @@ const FormCreateUser: FC<Props> = ({}) => {
   };
   const handleCreateUser = () => {
     //navigate(`/partida/${inputValue}`);
-    alert(`Usuario creado con nombre ${inputValue}`);
     setIsOpen(false);
+    sessionStorage.setItem("adminName", inputValue);
   };
 
   return (
