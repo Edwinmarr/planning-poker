@@ -3,51 +3,66 @@ import InputField from "../../atoms/InputField/InputField";
 import RadioButton from "../../atoms/RadioButton/RadioButton";
 import { Button } from "../../atoms";
 import styles from "./FormCreateUser.module.scss";
+import { validateInput, validateUserRole } from "../../../util/Util";
+import { UserRoles } from "../../../config/types";
 
-interface Props {}
+interface Props {
+  onCreateUser: (name: string, type: UserRoles) => void;
+}
 
-const FormCreateUser: FC<Props> = ({}) => {
+const FormCreateUser: FC<Props> = ({ onCreateUser }) => {
   const [inputValue, setInputValue] = useState("");
-  const [isOpen, setIsOpen] = useState(true);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [userRole, setUserRole] = useState<UserRoles>();
+  const [isValid, setIsValid] = useState(false);
 
   const handleOnChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setInputValue(value);
-    value != "" ? setIsButtonDisabled(false) : setIsButtonDisabled(true);
+    validateInput(value, setErrorMessage, setIsValid);
+    validateUserRole(userRole, setErrorMessage, setIsValid);
+    console.log(errorMessage);
   };
-  const handleCreateUser = () => {
-    //navigate(`/partida/${inputValue}`);
-    setIsOpen(false);
-    sessionStorage.setItem("adminName", inputValue);
+  const handleOnChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setUserRole(value as UserRoles);
   };
 
   return (
     <>
-      {isOpen && (
-        <div className={styles["modal-overlay"]}>
-          <div className={styles["form-create-user-container"]}>
-            <InputField
-              id={styles["form-create-user-container__input-field"]}
-              value={inputValue}
-              onChange={handleOnChangeInput}
-              label="Tu nombre"
-            ></InputField>
-            <div
-              className={styles["form-create-user-container__radio-buttons"]}
-            >
-              <RadioButton name="user" value="Jugador"></RadioButton>
-              <RadioButton name="user" value="Espectador"></RadioButton>
-            </div>
-            <Button
-              id={styles["form-create-user-container__Button"]}
-              label="Continuar"
-              onClick={handleCreateUser}
-              disabled={isButtonDisabled}
-            ></Button>
+      (
+      <div className={styles["modal-overlay"]}>
+        <div className={styles["form-create-user-container"]}>
+          <InputField
+            id={styles["form-create-user-container__input-field"]}
+            value={inputValue}
+            onChange={handleOnChangeInput}
+            errorMessage={errorMessage}
+            label="Tu nombre"
+          ></InputField>
+          <div className={styles["form-create-user-container__radio-buttons"]}>
+            <RadioButton
+              name="user"
+              value="Jugador"
+              onChange={handleOnChangeRadio}
+            ></RadioButton>
+            <RadioButton
+              name="user"
+              value="Espectador"
+              onChange={handleOnChangeRadio}
+            ></RadioButton>
           </div>
+          <Button
+            id={styles["form-create-user-container__Button"]}
+            label="Continuar"
+            onClick={() => {
+              if (userRole) onCreateUser(inputValue, userRole);
+            }}
+            disabled={!isValid}
+          ></Button>
         </div>
-      )}
+      </div>
+      )
     </>
   );
 };

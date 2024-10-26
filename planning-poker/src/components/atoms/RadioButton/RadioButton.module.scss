@@ -8,6 +8,7 @@ input[type="radio"]{
 }
 
 .radio-button-container{
+    display: flex;
     .radio-button{
         height: 1rem;
         width: 1rem;
