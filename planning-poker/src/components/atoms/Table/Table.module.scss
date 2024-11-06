@@ -4,11 +4,8 @@
     display: flex;
     justify-content: center; /* Centra horizontalmente */
     align-items: center;     /* Centra verticalmente */
-    width: 90vw;             /* Ajusta según tu diseño, o establece un ancho fijo */
-    height: 80vh;           /* Hace que el contenedor ocupe toda la altura de la pantalla */
   }
   
-  .big-table,
   .medium-table,
   .small-table {
     position: absolute;

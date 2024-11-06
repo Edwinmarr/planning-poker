@@ -1,6 +1,28 @@
-.root-container{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.root-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  .table-area {
+    grid-area: 1 / 1 / 2 / 2;
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      gap: 7rem;
+      &--middle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+    }
+  }
+  .deck-area {
+    padding-top: 3rem;
+    grid-area: 2 / 1 / 3 / 2;
+  }
 }
