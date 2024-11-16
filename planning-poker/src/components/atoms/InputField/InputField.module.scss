@@ -9,11 +9,14 @@
       background-color: transparent;
       border: 1px solid $primary-border-color;
       min-width: 100px;
+      width: 300px;
       min-height: 40px;
       color: $white-color;
       padding: 10px 20px;
     }
     &__label{
+      min-width: 100px;
+      width: 300px;
       color: $white-color;
       font-weight: 700;
     }

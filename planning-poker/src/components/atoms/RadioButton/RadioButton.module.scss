@@ -1,10 +1,17 @@
 @import '../../../App.scss';
 
-.radio-button{
-    border-style:solid;
-    border-width: 1px;
-    border-color: $primary-border-color;
-    background-color: $primary-inner-color;
-    height: 1rem;
-    width: 1rem;
+
+input[type="radio"]{
+    width: 20px;
+    height: 20px;
+    accent-color: $primary-inner-color;
 }
+
+.radio-button-container{
+    display: flex;
+    .radio-button{
+        height: 1rem;
+        width: 1rem;
+    }
+}
+
