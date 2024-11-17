@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { FormCreateRoom } from "./FormCreateRoom";
@@ -67,7 +67,7 @@ describe("<FormCreateRoom>", () => {
 
   it("should show an error message when the input has special characters", () => {
     // Given
-    const specialCharText = "Prote@room";
+    const specialCharText = "Prote#room";
     render(
       <BrowserRouter>
         <FormCreateRoom />
@@ -113,10 +113,10 @@ describe("<FormCreateRoom>", () => {
     screen.getByText("No puede tener más de 3 números.");
   });
 
-  it("should show an alert with the room name when the form is submitted", () => {
+  // As a software developer that is writing tests for the FormCreateRoom component, I want to test that the navigate executes and change the path, so that I can ensure that the room is created when the button is clicked.
+  it("should navigate to the room when the button is clicked", () => {
     // Given
-    const validText = "ProteRoom";
-    window.alert = vi.fn();
+    const roomName = "Sprint32";
     render(
       <BrowserRouter>
         <FormCreateRoom />
@@ -124,10 +124,10 @@ describe("<FormCreateRoom>", () => {
     );
     // When
     fireEvent.change(screen.getByTestId("inputFieldTestId"), {
-      target: { value: validText },
+      target: { value: roomName },
     });
     fireEvent.click(screen.getByTestId("ButtonTestId"));
     // Then
-    expect(window.alert).toHaveBeenCalledWith(`Room created: ${validText}`);
+    expect(window.location.pathname).toBe(`/partida/${roomName}`);
   });
 });
