@@ -3,7 +3,7 @@ import InputField from "../../atoms/InputField/InputField";
 import RadioButton from "../../atoms/RadioButton/RadioButton";
 import { Button } from "../../atoms";
 import styles from "./FormCreateUser.module.scss";
-import { validateInput, validateUserRole } from "../../../util/Util";
+import { validateInput } from "../../../util/Util";
 import { UserRoles } from "../../../config/types";
 
 interface Props {
@@ -20,7 +20,6 @@ const FormCreateUser: FC<Props> = ({ onCreateUser }) => {
     const { value } = event.target;
     setInputValue(value);
     validateInput(value, setErrorMessage, setIsValid);
-    validateUserRole(userRole, setErrorMessage, setIsValid);
     console.log(errorMessage);
   };
   const handleOnChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,13 +41,15 @@ const FormCreateUser: FC<Props> = ({ onCreateUser }) => {
           ></InputField>
           <div className={styles["form-create-user-container__radio-buttons"]}>
             <RadioButton
+              label="Jugador"
               name="user"
-              value="Jugador"
+              value="player"
               onChange={handleOnChangeRadio}
             ></RadioButton>
             <RadioButton
+              label="Espectador"
               name="user"
-              value="Espectador"
+              value="spectator"
               onChange={handleOnChangeRadio}
             ></RadioButton>
           </div>
@@ -58,7 +59,7 @@ const FormCreateUser: FC<Props> = ({ onCreateUser }) => {
             onClick={() => {
               if (userRole) onCreateUser(inputValue, userRole);
             }}
-            disabled={!isValid}
+            disabled={!isValid || !userRole}
           ></Button>
         </div>
       </div>

@@ -5,6 +5,7 @@ import Label from "../Label/Label";
 interface Props {
   value: string;
   name: string;
+  label: string;
   testId?: string;
   id?: string;
   checked?: boolean;
@@ -13,6 +14,7 @@ interface Props {
 
 const RadioButton: FC<Props> = ({
   value,
+  label,
   name,
   testId,
   id,
@@ -24,7 +26,7 @@ const RadioButton: FC<Props> = ({
       <Label
         className="normal_label"
         id={styles["radio-button-container__label"]}
-        text={value}
+        text={label}
       ></Label>
       <input
         id={id}
