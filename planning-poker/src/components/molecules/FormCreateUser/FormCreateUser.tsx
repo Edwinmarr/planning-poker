@@ -38,6 +38,7 @@ const FormCreateUser: FC<Props> = ({ onCreateUser }) => {
             onChange={handleOnChangeInput}
             errorMessage={errorMessage}
             label="Tu nombre"
+            testId="inputFieldTestId"
           ></InputField>
           <div className={styles["form-create-user-container__radio-buttons"]}>
             <RadioButton
