@@ -1,0 +1,20 @@
+.table-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  #calculate-button {
+    position: absolute;
+    z-index: 4;
+  }
+  #reset-button {
+    z-index: 4;
+    position: absolute;
+  }
+}
+
+/* Opcional: Ajustar tamaños */
+.big-table {
+  z-index: 3; /* Imagen de arriba */
+}

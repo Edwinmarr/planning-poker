@@ -1,0 +1,14 @@
+@import '../../../App.scss';
+
+.bold_label{
+    color: $white-color;
+    font-weight: 700;
+}
+.normal_label{
+    color: $white-color;
+    font-weight: 200;
+}
+.danger_label {
+    color: $primary-border-color;
+    font-weight: 700;
+}
