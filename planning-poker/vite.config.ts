@@ -9,6 +9,11 @@ export default defineConfig({
   plugins: [react()],
   test: {
     // Configuración de Vitest
+    coverage: {
+      provider: 'v8',
+      reporter: ['lcov', 'text-summary'],
+      reportsDirectory: 'coverage',
+    },
     globals: true,
     environment: 'jsdom',
     setupFiles: 'src/test/setup.ts',
