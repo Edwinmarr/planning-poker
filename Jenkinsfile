@@ -2,44 +2,58 @@ pipeline {
     agent any
 
     environment {
-        NODEJS_HOME = tool name: 'NodeJS' // Configura el nombre que diste a NodeJS
+        NODEJS_HOME = tool name: 'NodeJS'
         PATH = "${NODEJS_HOME}/bin:${env.PATH}"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                dir('planning-poker') {
+                    checkout scm
+                }
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                dir('planning-poker') {
+                    sh 'npm install'
+                }
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'npm run test'
+                dir('planning-poker') {
+                    sh 'npm run test'
+                }
+            }
+        }
+
+        stage('Convert Coverage to LCOV') {
+            steps {
+                dir('planning-poker') {
+                    sh 'npx jest-lcov-reporter --inputFile=coverage/coverage-final.json --outputFile=coverage/lcov.info'
+                }
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
-                script {
-                    def scannerHome = tool name: 'SonarQube Scanner'
-                    withSonarQubeEnv('SonarQube') { // Usa el nombre configurado en Jenkins
-                        sh """
-                        ${scannerHome}/bin/sonar-scanner \
-                        -Dsonar.projectKey=planning-poker \
-                        -Dsonar.sources=src \
-                        -Dsonar.tests=src \
-                        -Dsonar.javascript.lcov.reportPaths=coverage/lcov-report/lcov.info \
-                        -Dsonar.language=js \
-                        -Dsonar.typescript.tsconfigPath=tsconfig.json \
-                        -Dsonar.nodejs.executable=node
-                        """
+                dir('planning-poker') {
+                    script {
+                        def scannerHome = tool name: 'SonarQube Scanner'
+                        withSonarQubeEnv('SonarQube') {
+                            sh """
+                            ${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=planning-poker \
+                            -Dsonar.sources=src \
+                            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
+                            -Dsonar.language=js \
+                            -Dsonar.nodejs.executable=node
+                            """
+                        }
                     }
                 }
             }
