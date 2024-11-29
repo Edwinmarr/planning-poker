@@ -5,7 +5,7 @@ interface Props {
   name?: string;
   className: string;
   ready: boolean;
-  cardValue?: number | string;
+  cardValue?: number | string | null;
   shouldCalculate: boolean;
 }
 

@@ -1,9 +1,10 @@
-import { useState, FC } from "react";
+import { useState, FC, useEffect } from "react";
 import styles from "./Deck.module.scss";
 import Card from "../../atoms/Card/Card";
 
 interface Props {
   onSelectCard?: (value: number | string) => void;
+  resetSelection?: boolean;
 }
 
 interface CardItem {
@@ -27,10 +28,16 @@ const fibonacci: CardItem[] = [
   { label: "?", value: "questionMark" },
 ];
 
-const Deck: FC<Props> = ({ onSelectCard }) => {
+const Deck: FC<Props> = ({ onSelectCard, resetSelection }) => {
   const [selectedCard, setSelectedCard] = useState<number | string | null>(
     null
   );
+
+  useEffect(() => {
+    if (resetSelection) {
+      setSelectedCard(null);
+    }
+  }, [resetSelection]);
 
   const handleOnSelectCard = (value: number | string) => {
     setSelectedCard(value);
@@ -43,17 +50,15 @@ const Deck: FC<Props> = ({ onSelectCard }) => {
     <div className={styles["deck-container"]}>
       <h2>Elige una carta 👇</h2>
       <div className={styles["card-container"]}>
-        {fibonacci.map((item, index) => {
-          return (
-            <Card
-              key={index}
-              label={item.label}
-              value={item.value}
-              onClick={handleOnSelectCard}
-              isSelected={selectedCard === item.value}
-            />
-          );
-        })}
+        {fibonacci.map((item, index) => (
+          <Card
+            key={index}
+            label={item.label}
+            value={item.value}
+            onClick={handleOnSelectCard}
+            isSelected={selectedCard === item.value}
+          />
+        ))}
       </div>
     </div>
   );
