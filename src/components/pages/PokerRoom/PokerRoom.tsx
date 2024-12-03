@@ -6,6 +6,7 @@ import UserProfile from "../../atoms/UserProfile/UserProfile";
 import { UserRoles } from "../../../config/types";
 import Deck from "../../molecules/Deck/Deck";
 import Label from "../../atoms/Label/Label";
+import Header from "../../molecules/Header/Header";
 
 interface SelectedCards {
   [userName: string]: number | string;
@@ -80,6 +81,7 @@ const PokerRoom = () => {
 
   return (
     <>
+      <Header />
       {!adminName && <FormCreateUser onCreateUser={handleCreateUser} />}
       <article className={styles["root-container"]}>
         <div className={styles["table-area"]}>
