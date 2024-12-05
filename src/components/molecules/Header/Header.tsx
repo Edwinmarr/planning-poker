@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import styles from "./Header.module.scss";
 import Label from "../../atoms/Label/Label";
 import UserProfile from "../../atoms/UserProfile/UserProfile";
+import { Button } from "../../atoms";
 
 interface Props {
   logoLabel?: string;
@@ -33,6 +34,7 @@ const Header: FC<Props> = ({ logoLabel }) => {
             <Label
               text={decodeURIComponent(gameName)}
               className="bold_label"
+              id={styles["game-name-label"]}
             ></Label>
           )}
           {adminName && (
@@ -43,12 +45,11 @@ const Header: FC<Props> = ({ logoLabel }) => {
                 ready={true}
                 name={adminName}
               />
-              <button
-                className={styles["header-nav-container__invite-btn"]}
+              <Button
+                label="Invitar participantes"
                 onClick={handleInvitePlayers}
-              >
-                Invitar jugadores
-              </button>
+                id={styles["invite-players-button"]}
+              />
             </li>
           )}
         </ul>
