@@ -8,6 +8,7 @@ interface Props {
   disabled?: boolean;
   testId?: string;
   id?: string;
+  className: "button--primary" | "button--secondary";
 }
 
 const Button: FC<Props> = ({
@@ -17,11 +18,12 @@ const Button: FC<Props> = ({
   disabled = false,
   testId,
   id,
+  className,
 }) => {
   return (
     <button
       id={id}
-      className={styles.button}
+      className={styles[className]}
       type={type}
       onClick={onClick}
       disabled={disabled}

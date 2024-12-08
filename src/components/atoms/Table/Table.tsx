@@ -25,6 +25,7 @@ const Table: FC<Props> = ({
           label="Revelar cartas"
           onClick={onCalculateAverage}
           testId="calculateButton"
+          className="button--primary"
         />
       )}
       {showResetButton && (
@@ -33,6 +34,7 @@ const Table: FC<Props> = ({
           label="Resetear juego"
           onClick={onResetVotes}
           testId="resetButton"
+          className="button--primary"
         />
       )}
     </div>

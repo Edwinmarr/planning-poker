@@ -61,6 +61,7 @@ const FormCreateUser: FC<Props> = ({ onCreateUser }) => {
               if (userRole) onCreateUser(inputValue, userRole);
             }}
             disabled={!isValid || !userRole}
+            className="button--primary"
           ></Button>
         </div>
       </div>

@@ -20,9 +20,13 @@
       justify-self: end;
       grid-area: 1 / 3 / 2 / 4;
       display: flex;
+      gap: 1rem;
+
       #invite-players-button {
         max-width: 20rem;
         max-height: 3rem;
+      }
+      #user-profile-menu {
       }
     }
 

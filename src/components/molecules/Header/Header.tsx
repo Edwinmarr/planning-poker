@@ -44,11 +44,13 @@ const Header: FC<Props> = ({ logoLabel }) => {
                 className="profile-spectator"
                 ready={true}
                 name={adminName}
+                id={styles["user-profile-menu"]}
               />
               <Button
                 label="Invitar participantes"
                 onClick={handleInvitePlayers}
                 id={styles["invite-players-button"]}
+                className="button--secondary"
               />
             </li>
           )}

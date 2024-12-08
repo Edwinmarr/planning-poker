@@ -7,6 +7,7 @@ interface Props {
   ready: boolean;
   cardValue?: number | string | null;
   shouldCalculate: boolean;
+  id?: string;
 }
 
 const UserProfile: FC<Props> = ({
@@ -15,6 +16,7 @@ const UserProfile: FC<Props> = ({
   ready,
   cardValue,
   shouldCalculate,
+  id,
 }) => {
   // Obtener las primeras dos letras del nombre
   const getInitials = (name: string | undefined) => {
@@ -23,7 +25,7 @@ const UserProfile: FC<Props> = ({
 
   if (className === "profile-player" && ready) {
     return (
-      <div className={style["user-profile"]}>
+      <div className={style["user-profile"]} id={id}>
         <div className={style[className + "__ready"]}>
           {shouldCalculate ? cardValue : ""}
         </div>
@@ -32,7 +34,7 @@ const UserProfile: FC<Props> = ({
     );
   } else if (className === "profile-player") {
     return (
-      <div className={style["user-profile"]}>
+      <div className={style["user-profile"]} id={id}>
         <div className={style[className]}>
           {shouldCalculate ? cardValue : ""}
         </div>
@@ -41,7 +43,7 @@ const UserProfile: FC<Props> = ({
     );
   }
   return (
-    <div className={style["user-profile"]}>
+    <div className={style["user-profile"]} id={id}>
       <div className={style[className]}>{getInitials(name)}</div>
     </div>
   );
