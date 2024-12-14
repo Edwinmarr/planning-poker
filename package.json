@@ -6,7 +6,7 @@
   "scripts": {
     "test": "vitest --coverage",
     "dev": "vite",
-    "build": "tsc -b && vite build && node obfuscate.js",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
