@@ -23,30 +23,37 @@ const UserProfile: FC<Props> = ({
     return name ? name.substring(0, 2).toUpperCase() : "";
   };
 
-  if (className === "profile-player" && ready) {
-    return (
-      <div className={style["user-profile"]} id={id}>
-        <div className={style[className + "__ready"]}>
-          {shouldCalculate ? cardValue : ""}
-        </div>
-        <div className={style["name"]}>{name}</div>
-      </div>
-    );
-  } else if (className === "profile-player") {
-    return (
-      <div className={style["user-profile"]} id={id}>
-        <div className={style[className]}>
-          {shouldCalculate ? cardValue : ""}
-        </div>
-        <div className={style["name"]}>{name}</div>
-      </div>
-    );
-  }
-  return (
-    <div className={style["user-profile"]} id={id}>
-      <div className={style[className]}>{getInitials(name)}</div>
-    </div>
-  );
+  const renderUserProfile = () => {
+    if (className != "profile-player") {
+      return (
+        <>
+          <div className={style[className]} id={id}>
+            {getInitials(name)}
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div
+            className={
+              style[
+                className +
+                  `${ready ? "__ready" : ""}` +
+                  `${shouldCalculate ? "__revealed" : ""}`
+              ]
+            }
+            id={id}
+          >
+            {shouldCalculate ? cardValue : ""}
+          </div>
+          <div className={style["name"]}>{name}</div>
+        </>
+      );
+    }
+  };
+
+  return <div className={style["user-profile"]}>{renderUserProfile()}</div>;
 };
 
 export default UserProfile;

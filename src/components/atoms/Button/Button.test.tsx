@@ -4,14 +4,26 @@ import Button from "./Button";
 
 describe("<Button>", () => {
   it("should render the button", () => {
-    render(<Button label="Crear partida" onClick={vi.fn()} />);
+    render(
+      <Button
+        label="Crear partida"
+        onClick={vi.fn()}
+        className="button--primary"
+      />
+    );
     screen.getByText("Crear partida");
   });
 
   it("should render the button and execute onClick", () => {
     //Given
     const onClick = vi.fn();
-    render(<Button label="Crear partida" onClick={onClick} />);
+    render(
+      <Button
+        label="Crear partida"
+        onClick={onClick}
+        className="button--primary"
+      />
+    );
     //When
     fireEvent.click(screen.getByText("Crear partida"));
     //Then

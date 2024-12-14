@@ -7,6 +7,7 @@ import { UserRoles } from "../../../config/types";
 import Deck from "../../molecules/Deck/Deck";
 import Label from "../../atoms/Label/Label";
 import Header from "../../molecules/Header/Header";
+import { fibonacci, mockResults } from "../../../util/votingSystem";
 
 interface SelectedCards {
   [userName: string]: number | string;
@@ -163,17 +164,25 @@ const PokerRoom = () => {
           </div>
         </div>
         <div className={styles["deck-area"]}>
-          {adminRole === UserRoles.PLAYER && !shouldCalculate && (
+          {adminRole === UserRoles.PLAYER && (
             <Deck
               onSelectCard={(value) => handleSelectCard(adminName!, value)}
               resetSelection={resetSelection}
+              cards={shouldCalculate ? mockResults : fibonacci}
             />
           )}
           {shouldCalculate && (
             <div className={styles["average-container"]}>
-              <Label className="normal_label" text="Promedio" />
-              <br />
-              <Label className="bold_label" text={"" + calculateAverage()} />
+              <Label
+                id={styles["average_label"]}
+                className="normal_label"
+                text="Promedio: "
+              />
+              <Label
+                id={styles["average_value"]}
+                className="bold_label"
+                text={"" + calculateAverage()}
+              />
             </div>
           )}
         </div>
