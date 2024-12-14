@@ -5,15 +5,23 @@ import Table from "../../atoms/Table/Table";
 import UserProfile from "../../atoms/UserProfile/UserProfile";
 import { UserRoles } from "../../../config/types";
 import Deck from "../../molecules/Deck/Deck";
+import Label from "../../atoms/Label/Label";
+import Header from "../../molecules/Header/Header";
+import { fibonacci, mockResults } from "../../../util/votingSystem";
 
-type SelectedCards = Record<string, number | string>;
+interface SelectedCards {
+  [userName: string]: number | string;
+}
 
 const PokerRoom = () => {
   const [adminName, setAdminName] = useState<string | null>(null);
   const [adminRole, setAdminRole] = useState<UserRoles | null>(null);
-  const [selectedCard, setSelectedCard] = useState<number | string>();
+  const [selectedCard, setSelectedCard] = useState<number | string | null>(
+    null
+  );
   const [selectedCards, setSelectedCards] = useState<SelectedCards>({});
-  const [isCalculated, setIsCalculated] = useState<boolean>(false);
+  const [shouldCalculate, setShouldCalculate] = useState<boolean>(false);
+  const [resetSelection, setResetSelection] = useState<boolean>(false);
 
   const handleCreateUser = (name: string, type: UserRoles) => {
     sessionStorage.setItem("adminName", name);
@@ -31,13 +39,15 @@ const PokerRoom = () => {
   };
 
   const handleCalculateAverage = () => {
-    setIsCalculated(true);
+    setShouldCalculate(true);
   };
 
   const handleResetGame = () => {
-    setSelectedCard(undefined);
+    setSelectedCard(null);
     setSelectedCards({});
-    setIsCalculated(false);
+    setShouldCalculate(false);
+    setResetSelection(true);
+    setTimeout(() => setResetSelection(false), 0); // Reset the selection state after a short delay
   };
 
   useEffect(() => {
@@ -49,6 +59,7 @@ const PokerRoom = () => {
 
     // Simular la selección de cartas de los usuarios mock
     const mockSelectedCards: SelectedCards = {
+      Andrés: 5,
       Caro: 8,
       Valeria: 3,
       Pedro: 13,
@@ -65,11 +76,13 @@ const PokerRoom = () => {
     ) as number[];
     if (numericValues.length === 0) return 0;
     const sum = numericValues.reduce((acc, curr) => acc + curr, 0);
-    return sum / numericValues.length;
+    const average = sum / numericValues.length;
+    return parseFloat(average.toFixed(2));
   };
 
   return (
     <>
+      <Header />
       {!adminName && <FormCreateUser onCreateUser={handleCreateUser} />}
       <article className={styles["root-container"]}>
         <div className={styles["table-area"]}>
@@ -79,21 +92,21 @@ const PokerRoom = () => {
               className="profile-player"
               name={"Andrés"}
               cardValue={selectedCards["Andrés"]}
-              shouldCalculate={isCalculated}
+              shouldCalculate={shouldCalculate}
             />
             <UserProfile
               ready={selectedCards["Caro"] !== undefined}
               className="profile-player"
               name={"Caro"}
               cardValue={selectedCards["Caro"]}
-              shouldCalculate={isCalculated}
+              shouldCalculate={shouldCalculate}
             />
             <UserProfile
               ready={selectedCards["Valeria"] !== undefined}
               className="profile-player"
               name={"Valeria"}
               cardValue={selectedCards["Valeria"]}
-              shouldCalculate={isCalculated}
+              shouldCalculate={shouldCalculate}
             />
           </div>
           <div className={styles["row--middle"]}>
@@ -102,18 +115,18 @@ const PokerRoom = () => {
               className="profile-player"
               name={"Pedro"}
               cardValue={selectedCards["Pedro"]}
-              shouldCalculate={isCalculated}
+              shouldCalculate={shouldCalculate}
             />
             {
               <Table
-                onCalculateAverage={handleCalculateAverage}
                 onResetVotes={handleResetGame}
+                onCalculateAverage={handleCalculateAverage}
                 showAverageButton={
                   adminRole === UserRoles.PLAYER &&
                   selectedCard !== null &&
-                  !isCalculated
+                  !shouldCalculate
                 }
-                showResetButton={isCalculated}
+                showResetButton={shouldCalculate}
               />
             }
             <UserProfile
@@ -121,7 +134,7 @@ const PokerRoom = () => {
               className="profile-player"
               name={"David"}
               cardValue={selectedCards["David"]}
-              shouldCalculate={isCalculated}
+              shouldCalculate={shouldCalculate}
             />
           </div>
           <div className={styles["row"]}>
@@ -130,15 +143,15 @@ const PokerRoom = () => {
               className="profile-player"
               name={"Aris"}
               cardValue={selectedCards["Aris"]}
-              shouldCalculate={isCalculated}
+              shouldCalculate={shouldCalculate}
             />
             {adminName && (
               <UserProfile
-                ready={!!selectedCard}
+                ready={selectedCard !== null}
                 className={`profile-${adminRole}`}
                 name={adminName}
                 cardValue={selectedCard}
-                shouldCalculate={isCalculated}
+                shouldCalculate={shouldCalculate}
               />
             )}
             <UserProfile
@@ -146,21 +159,30 @@ const PokerRoom = () => {
               className="profile-player"
               name={"Juan"}
               cardValue={selectedCards["Juan"]}
-              shouldCalculate={isCalculated}
+              shouldCalculate={shouldCalculate}
             />
           </div>
         </div>
-
         <div className={styles["deck-area"]}>
           {adminRole === UserRoles.PLAYER && (
             <Deck
               onSelectCard={(value) => handleSelectCard(adminName!, value)}
+              resetSelection={resetSelection}
+              cards={shouldCalculate ? mockResults : fibonacci}
             />
           )}
-          {isCalculated && (
+          {shouldCalculate && (
             <div className={styles["average-container"]}>
-              <h3>Promedio de las cartas seleccionadas:</h3>
-              <p>{calculateAverage()}</p>
+              <Label
+                id={styles["average_label"]}
+                className="normal_label"
+                text="Promedio: "
+              />
+              <Label
+                id={styles["average_value"]}
+                className="bold_label"
+                text={"" + calculateAverage()}
+              />
             </div>
           )}
         </div>

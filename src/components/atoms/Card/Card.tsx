@@ -6,15 +6,19 @@ interface Props {
   value: number | string;
   onClick: (value: number | string) => void;
   isSelected?: boolean;
+  amount?: string;
 }
 
-const Card: FC<Props> = ({ label, value, onClick, isSelected }) => {
+const Card: FC<Props> = ({ label, value, onClick, isSelected, amount }) => {
   return (
-    <div
-      className={`${styles["card"]} ${isSelected ? styles["selected"] : ""}`}
-      onClick={() => onClick(value)}
-    >
-      {label}
+    <div className={styles["card_container"]}>
+      <div
+        className={`${styles["card"]} ${isSelected ? styles["selected"] : ""}`}
+        onClick={() => onClick(value)}
+      >
+        {label}
+      </div>
+      <div>{amount}</div>
     </div>
   );
 };

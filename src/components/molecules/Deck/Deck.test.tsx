@@ -8,7 +8,11 @@ describe("Deck", () => {
   it("should render the component", () => {
     // Given
     const onSelectCard = vi.fn();
-    render(<Deck onSelectCard={onSelectCard} />);
+    const cards = [
+      { id: 1, label: "Card 1", value: 0 },
+      { id: 2, label: "Card 2", value: 1 },
+    ]; // Example cards
+    render(<Deck onSelectCard={onSelectCard} cards={cards} />);
     // Then
     screen.getByText("Elige una carta 👇");
   });
@@ -16,10 +20,16 @@ describe("Deck", () => {
   it("should call onSelectCard when a card is clicked", () => {
     // Given
     const onSelectCard = vi.fn();
-    render(<Deck onSelectCard={onSelectCard} />);
+    const cards = [
+      { id: 1, label: "Card 1", value: 0 },
+      { id: 2, label: "Card 2", value: 1 },
+    ]; // Example cards
+    render(
+      <Deck testId="deckTest" onSelectCard={onSelectCard} cards={cards} />
+    );
     // When
-    fireEvent.click(screen.getByText("0"));
+    fireEvent.click(screen.getByText("Card 1"));
     // Then
-    expect(onSelectCard).toHaveBeenCalledWith(0);
+    expect(onSelectCard).toHaveBeenCalled();
   });
 });

@@ -36,6 +36,7 @@ export const FormCreateRoom = () => {
         label="Crear partida"
         disabled={!isValid}
         testId="ButtonTestId"
+        className="button--primary"
       />
     </div>
   );

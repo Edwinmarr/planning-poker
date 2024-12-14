@@ -1,6 +1,6 @@
 @import "../../../App.scss";
 
-button.button {
+.button--primary {
   border-radius: 5rem;
   padding: 10px 20px;
   border: none;
@@ -15,4 +15,15 @@ button.button {
     color: $secondary-color;
     cursor: not-allowed;
   }
+}
+
+.button--secondary {
+  border-radius: 5rem;
+  border: 1px solid $white-color;
+  padding: 10px 20px;
+  color: $white-color;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
 }
